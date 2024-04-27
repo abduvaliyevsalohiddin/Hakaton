@@ -5,5 +5,6 @@ from .views import *
 urlpatterns = [
     path('register/', ProfilRegistrationView.as_view()),
     path('profil/<int:pk>/', ProfilRetrieveUpdateDestroyView.as_view()),
+    path('profil/', ProfileAPIView.as_view())
 
 ]
