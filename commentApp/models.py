@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 from coreApp.models import CoreModel
@@ -17,7 +18,7 @@ class Comment(CoreModel):
 class Like(CoreModel):
     user = models.ForeignKey(Profil, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    grade = models.FloatField(default=0.0)
+    grade = models.FloatField(default=0.0, validators=[MinValueValidator(0), MaxValueValidator(5)])
 
     def __str__(self):
         return f"{self.user} - {self.project}"

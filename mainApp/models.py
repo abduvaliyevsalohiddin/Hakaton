@@ -17,6 +17,9 @@ class Project(CoreModel):
     title = models.CharField(max_length=255)
     content = models.TextField(blank=True, null=True)
     price = models.FloatField(default=0.0)
-    video = models.FileField(upload_to='project_video', blank=True, null=True)
+    video = models.URLField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     user = models.ForeignKey(Profil, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.title} - {self.user.role}'

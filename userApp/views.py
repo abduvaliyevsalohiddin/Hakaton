@@ -5,12 +5,12 @@ from .serializers import *
 
 
 class ProfilRegistrationView(CreateAPIView):
-    permission_classes = (AllowAny)
+    permission_classes = (AllowAny,)
     serializer_class = ProfilSerializer
     queryset = Profil.objects.all()
 
 
 class ProfilRetrieveUpdateDestroyView(RetrieveUpdateAPIView):
-    permission_classes = (IsAuthenticated)
+    permission_classes = (IsAuthenticated,)
     serializer_class = ProfilSerializer
     queryset = Profil.objects.all()

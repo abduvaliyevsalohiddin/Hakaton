@@ -1,3 +1,4 @@
+from rest_framework import filters
 from rest_framework.generics import *
 from rest_framework.permissions import *
 from rest_framework.views import *
@@ -11,6 +12,11 @@ class CategoryListCreateView(ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name', 'description']
+    search_description = 'Search by name and description'
+    ordering_fields = ['id', 'name']
 
 
 class ProjectAPIView(APIView):
@@ -35,6 +41,9 @@ class ProjectAPIView(APIView):
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(
+        request_body=ProjectSerializer,
+    )
     def post(self, request):
         serializer = ProjectSerializer(data=request.data)
         if serializer.is_valid():
