@@ -26,7 +26,7 @@ urlpatterns = [
     path('connectapp/', include('connectApp.urls')),
     path('userapp/', include('userApp.urls')),
 
-    path('docs/', schema_view.with_ui('swagger', cache_timeout=0)),
+    path('', schema_view.with_ui('swagger', cache_timeout=0)),
 
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
