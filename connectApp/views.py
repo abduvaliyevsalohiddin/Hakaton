@@ -21,7 +21,7 @@ class ConnectionCreateAPIView(CreateAPIView):
 
 
 class VacanciesAPIView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class = VacancySerializer
     queryset = Vacancy.objects.all()
 
