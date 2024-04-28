@@ -30,13 +30,22 @@ class ProjectAPIView(APIView):
                 description="Filter by Price",
                 type=openapi.TYPE_INTEGER,
             ),
+            openapi.Parameter(
+                name="category_id",
+                in_=openapi.IN_QUERY,
+                description="Filter by Category ID",
+                type=openapi.TYPE_INTEGER,
+            ),
         ],
     )
     def get(self, request):
         projects = Project.objects.all()
         price = request.query_params.get('price')
+        category_id = request.query_params.get('category_id')
         if price:
             projects = projects.filter(price__gte=float(price))
+        if category_id:
+            projects = projects.filter(category=category_id)
 
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
