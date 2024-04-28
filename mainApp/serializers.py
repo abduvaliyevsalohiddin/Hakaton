@@ -1,4 +1,7 @@
 from rest_framework import serializers
+
+from connectApp.models import Vacancy
+from connectApp.serializers import VacancySerializer
 from .models import *
 
 
@@ -12,3 +15,14 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = '__all__'
+
+    def to_representation(self, instance):
+        project = super(ProjectSerializer, self).to_representation(instance)
+        vacancies = Vacancy.objects.filter(project_id=project)
+        serializer = VacancySerializer(vacancies, many=True)
+        project.update(
+            {
+                'vacancies': serializer.data
+            }
+        )
+        return project

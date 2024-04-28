@@ -9,3 +9,5 @@ class ProfilSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Profil.objects.create_user(**validated_data)
+
+
