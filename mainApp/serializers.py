@@ -18,7 +18,7 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         project = super(ProjectSerializer, self).to_representation(instance)
-        vacancies = Vacancy.objects.filter(project_id=project)
+        vacancies = Vacancy.objects.filter(project_id=project.id)
         serializer = VacancySerializer(vacancies, many=True)
         project.update(
             {
