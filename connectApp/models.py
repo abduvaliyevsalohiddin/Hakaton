@@ -15,11 +15,12 @@ class Connection(CoreModel):
 
 
 class Vacancy(CoreModel):
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, default="Job title")
     salary = models.CharField(max_length=255, blank=True, null=True)
     description = models.CharField(max_length=255, blank=True, null=True)
     soni = models.PositiveSmallIntegerField(default=1)
     active = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.project_id} -> {self.salary}'
+        return f'{self.project.title} -> {self.title}'
