@@ -9,7 +9,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 
 class CategoryListCreateView(ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
 
@@ -64,7 +64,7 @@ class ProjectAPIView(APIView):
 
 
 class ProjectRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     serializer_class = ProjectSerializer
     queryset = Project.objects.all()
 
