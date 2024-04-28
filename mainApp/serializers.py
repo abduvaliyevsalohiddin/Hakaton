@@ -16,14 +16,13 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = '__all__'
 
-    # def to_representation(self, instance):
-    #     project = super(ProjectSerializer, self).to_representation(instance)
-    #     vacancies = Vacancy.objects.filter(project__id=project.get('id'))
-    #     print(vacancies)
-    #     serializer = VacancySerializer(vacancies, many=True)
-    #     project.update(
-    #         {
-    #             'vacancies': serializer.data
-    #         }
-    #     )
-    #     return project
+    def to_representation(self, instance):
+        project = super(ProjectSerializer, self).to_representation(instance)
+        vacancies = Vacancy.objects.filter(project__id=project.get('id'))
+        vacancy_serializer = VacancySerializer(vacancies, many=True)
+        project.update(
+            {
+                'vacancies': vacancy_serializer.data
+            }
+        )
+        return project

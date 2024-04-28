@@ -20,7 +20,7 @@ class CategoryListCreateView(ListCreateAPIView):
 
 
 class ProjectAPIView(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     @swagger_auto_schema(
         manual_parameters=[
